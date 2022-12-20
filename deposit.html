@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JQM ATM</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div data-role="page" id="deposit-page" data-theme="b">
+      <div data-role="header">
+        <a type="button" href="/menu.html" data-ajax="false">Kembali</a>
+        <h1>Setor Tunai</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="deposit-form">
+          <label for="nominaldepo">Jumlah:</label>
+          <input type="number" id="nominaldepo" name="nominaldepo" />
+          <button type="submit" class="ui-btn ui-corner-all">Setor</button>
+        </form>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h4>Galih &copy 2022</h4>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        if (localStorage.getItem("auth") === null) {
+          alert("Silahkan Login Terlebih Dahulu");
+          window.location.href = "/";
+        }
+        $("#deposit-form").submit(function (e) {
+          e.preventDefault();
+
+          var nominaldepo = $("#nominaldepo").val();
+
+          if (nominaldepo == "" || nominaldepo <= 50000) {
+            alert("Jumlah Setoran Minimal Rp. 50.000");
+            return;
+          }
+
+          var saldo = parseInt(localStorage.getItem("saldo"));
+          saldo += parseInt(nominaldepo);
+          localStorage.setItem("saldo", saldo);
+
+          alert("Anda Berhasil Melakukan Setor Tunai Sebesar Rp. " + saldo);
+
+          window.location.href = "/menu.html";
+        });
+      });
+    </script>
+  </body>
+</html>

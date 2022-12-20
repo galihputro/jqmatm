@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JQM ATM</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div data-role="page" id="menu-page" data-theme="b">
+      <div data-role="header">
+        <h1>Menu</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <div class="card-container">
+          <div class="ui-card">
+            <div class="ui-card-header">
+              <h2>Saldo Anda</h2>
+            </div>
+            <div class="ui-card-content">
+              <p>Rp. <span id="saldo"></span></p>
+            </div>
+          </div>
+        </div>
+        <div data-role="content">
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <a
+                href="/deposit.html"
+                data-ajax="false"
+                class="ui-btn ui-corner-all"
+                >Setor Tunai</a
+              >
+            </div>
+            <div class="ui-block-b">
+              <a
+                href="/transfer.html"
+                data-ajax="false"
+                class="ui-btn ui-corner-all"
+                >Transfer</a
+              >
+            </div>
+          </div>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <a
+                href="/tariktunai.html"
+                data-ajax="false"
+                class="ui-btn ui-corner-all"
+                >Tarik Tunai</a
+              >
+            </div>
+            <div class="ui-block-b">
+              <button
+                id="logout-btn"
+                data-ajax="false"
+                class="ui-btn ui-corner-all"
+              >
+                Keluar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        if (localStorage.getItem("auth") === null) {
+          alert("Silahkan Login Terlebih Dahulu");
+          window.location.href = "/";
+        }
+      });
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>

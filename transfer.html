@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JQM ATM</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div data-role="page" id="transfer-page" data-theme="b">
+      <div data-role="header">
+        <a type="button" href="/menu.html" data-ajax="false">Kembali</a>
+        <h1>Transfer</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="transfer-form">
+          <label for="tujuan">Tujuan:</label>
+          <input type="text" id="tujuan" name="tujuan" />
+          <label for="nominaltf">Jumlah:</label>
+          <input type="number" id="nominaltf" name="nominaltf" />
+          <button type="submit" class="ui-btn ui-corner-all">Kirim</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        if (localStorage.getItem("auth") === null) {
+          alert("Silahkan Login Terlebih Dahulu");
+          window.location.href = "/";
+        }
+        $("#transfer-form").submit(function (e) {
+          e.preventDefault();
+
+          var tujuan = $("#tujuan").val();
+          var nominaltf = $("#nominaltf").val();
+
+          if (tujuan == "") {
+            alert("Silahkan masukkan NPM Tujuan");
+            return;
+          }
+          if (nominaltf == "" || nominaltf <= 50000) {
+            alert("Minimal transfer Rp. 50.000");
+            return;
+          }
+
+          var saldo = localStorage.getItem("saldo");
+          if (nominaltf > saldo) {
+            alert("Maaf saldo anda tidak mencukupi");
+            return;
+          }
+          saldo -= nominaltf;
+          localStorage.setItem("saldo", saldo);
+
+          alert("Transfer ke " + tujuan + " Berhasil");
+
+          window.location.href = "/menu.html";
+        });
+      });
+    </script>
+  </body>
+</html>

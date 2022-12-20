@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JQM ATM</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div data-role="page" id="withdraw-page">
+      <div data-role="header">
+        <a type="button" value="Icon only" href="/menu.html" data-ajax="false"
+          >Kembali</a
+        >
+        <h1>Tarik Tunai</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="withdraw-form">
+          <label for="nominaltt">Jumlah:</label>
+          <input type="number" id="nominaltt" name="nominaltt" />
+          <button type="submit" class="ui-btn ui-corner-all">Tarik</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        if (localStorage.getItem("auth") === null) {
+          alert("Silahkan Login Terlebih Dahulu");
+          window.location.href = "/";
+        }
+        $("#withdraw-form").submit(function (e) {
+          e.preventDefault();
+
+          var nominaltt = $("#nominaltt").val();
+
+          if (nominaltt == "" || nominaltt <= 50000) {
+            alert("Minimal Tarik Tunai Rp. 50.000");
+            return;
+          }
+
+          var saldo = localStorage.getItem("saldo");
+          if (saldo < nominaltt) {
+            alert("Maaf, saldo anda tidak mencukupi");
+            return;
+          }
+          saldo -= nominaltt;
+          localStorage.setItem("saldo", saldo);
+
+          alert(
+            "Anda telah berhasil melakukan penarikan tunai sebesar Rp. " +
+              nominaltt
+          );
+
+          window.location.href = "/menu.html";
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JQM ATM</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Alternatively, you can use a CDN with jsdelivr -->
+    <script src="https://cdn.jsdelivr.net/npm/localstorage-slim"></script>
+    <!-- or with unpkg.com -->
+    <script src="https://unpkg.com/localstorage-slim@2.3.0/dist/localstorage-slim.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="login-page" data-theme="b">
+      <div data-role="header">
+        <h1>Login</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="login-form" method="post" action="#">
+          <label for="npm">NPM:</label>
+          <input
+            type="text"
+            name="npm"
+            id="npm"
+            value=""
+            placeholder="DEMO NPM: 123456"
+            required
+          />
+          <label for="pin">PIN</label>
+          <input
+            type="password"
+            name="pin"
+            id="pin"
+            value=""
+            placeholder="Masukan PIN"
+            required
+          />
+          <input type="submit" value="Masuk" />
+        </form>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
